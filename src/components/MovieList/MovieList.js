@@ -8,13 +8,14 @@ import MovieCard from "../MovieCard/MovieCard";
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
+  watched: state,
 });
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, watched, moviesFiltered }) => {
+  console.log(movies, watched, moviesFiltered);
   let input;
 
   const [allMovies, setMovies] = useState([...movies]);
-  const [watched, updateWatched] = useCheckboxState();
 
   useEffect(() => {
     search();
@@ -29,10 +30,16 @@ const MovieList = ({ movies }) => {
     );
   };
 
-  const checked = () => {
-    updateWatched();
-    setMovies([...movies].filter((m) => m.completed === watched));
-  };
+  // const checked = (e) => {
+  //   updateWatched(e.target.value);
+  //   if (watched.watched) {
+  //     setMovies([...movies].filter((m) => !m.completed === watched));
+  //   } else if (watched.not_watched) {
+  //     setMovies([...movies].filter((m) => m.completed === watched));
+  //   } else {
+  //     search();
+  //   }
+  // };
 
   return (
     <div className="MovieList">
@@ -46,14 +53,22 @@ const MovieList = ({ movies }) => {
           onChange={search}
           placeholder="Introduce here the genre you wanna see"
         />
+        {/* <label>
+          <input type="checkbox" value={"all"} onChange={checked} />
+          All
+        </label>
         <label>
-          <input type="checkbox" value={watched} onChange={checked} />
+          <input type="checkbox" value={"watched"} onChange={checked} />
           Watched
         </label>
+        <label>
+          <input type="checkbox" value={"not_watched"} onChange={checked} />
+          Watched
+        </label> */}
       </form>
       <div>
         {allMovies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} iswatched={watched} />
+          <MovieCard key={movie.id} {...movie} />
         ))}
       </div>
     </div>

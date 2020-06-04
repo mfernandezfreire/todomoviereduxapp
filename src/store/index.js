@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { loadState, saveState } from "./permanentStore/permanent";
 import movies from "./reducers/movies";
+import watchedFilters from "./reducers/watchedFilters";
 
 const reducers = combineReducers({
   movies,
+  watchedFilters,
 });
 
 const initialData = loadState();

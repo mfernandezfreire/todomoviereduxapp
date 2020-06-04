@@ -46,10 +46,10 @@ export const addGenre = (id, genre) => {
   };
 };
 
-export const genreFilter = (genre, movies, filterMovies) => {
+export const genreFilter = (filter, movies) => {
   return {
     type: "GENRE_FILTER",
-    genre,
+    filter,
     movies,
   };
 };

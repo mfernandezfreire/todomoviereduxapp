@@ -43,11 +43,12 @@ const addMovie = (state = [], action) => {
           ? { ...movie, genre: movie.genre.push(action.genre) }
           : movie
       );
+
     default:
       return state;
   }
 };
 
-export const movielist = (state) => state;
+// export const movielist = (state) => state;
 
 export default addMovie;
