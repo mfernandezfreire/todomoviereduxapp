@@ -46,10 +46,26 @@ export const addGenre = (id, genre) => {
   };
 };
 
-export const genreFilter = (filter, movies) => {
+export const addMoviesFiltered = (movies) => {
   return {
-    type: "GENRE_FILTER",
+    type: "ADD_MOVIES_FILTERED",
+    movies,
+  };
+};
+
+export const watchedFilters = (filter, movies) => {
+  return {
+    type: "WATCHED_FILTER",
     filter,
     movies,
+  };
+};
+
+export const filterGenre = (filter, movies, genreFilter) => {
+  return {
+    type: "FILTER_GENRE",
+    filter,
+    movies,
+    genreFilter,
   };
 };

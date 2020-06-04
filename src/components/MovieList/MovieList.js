@@ -1,45 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-
-import useCheckboxState from "../../hooks/useCheckboxState";
+import {
+  addMoviesFiltered,
+  watchedFilters,
+  filterGenre,
+} from "../../store/actions";
 
 import MovieCard from "../MovieCard/MovieCard";
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  watched: state,
+  watched: state.watchedFilters,
 });
 
-const MovieList = ({ movies, watched, moviesFiltered }) => {
-  console.log(movies, watched, moviesFiltered);
+const MovieList = ({
+  movies,
+  watched,
+  addMoviesFiltered,
+  watchedFilters,
+  filterGenre,
+}) => {
   let input;
 
-  const [allMovies, setMovies] = useState([...movies]);
-
   useEffect(() => {
-    search();
+    addMoviesFiltered(movies);
   }, [movies]);
 
   const search = () => {
-    setMovies(
-      [...movies].filter(
-        (m) =>
-          m.genre.join("").toLowerCase().indexOf(input.value.toLowerCase()) >= 0
-      )
-    );
+    filterGenre(input.value, movies, watched.watchFilters);
   };
 
-  // const checked = (e) => {
-  //   updateWatched(e.target.value);
-  //   if (watched.watched) {
-  //     setMovies([...movies].filter((m) => !m.completed === watched));
-  //   } else if (watched.not_watched) {
-  //     setMovies([...movies].filter((m) => m.completed === watched));
-  //   } else {
-  //     search();
-  //   }
-  // };
+  const checked = (watched) => {
+    watchedFilters(watched, movies);
+  };
 
   return (
     <div className="MovieList">
@@ -49,30 +43,45 @@ const MovieList = ({ movies, watched, moviesFiltered }) => {
         <label>Da filters</label>
         <input
           type="text"
-          ref={(node) => (input = node)}
+          ref={(node) => {
+            input = node;
+          }}
           onChange={search}
           placeholder="Introduce here the genre you wanna see"
         />
-        {/* <label>
-          <input type="checkbox" value={"all"} onChange={checked} />
-          All
-        </label>
-        <label>
-          <input type="checkbox" value={"watched"} onChange={checked} />
-          Watched
-        </label>
-        <label>
-          <input type="checkbox" value={"not_watched"} onChange={checked} />
-          Watched
-        </label> */}
+        {watched.watchFilters.all ? (
+          <input type="button" value="All" disabled />
+        ) : (
+          <input type="button" value="All" onClick={() => checked("all")} />
+        )}
+        {watched.watchFilters.watched ? (
+          <input type="button" value="Watched" disabled />
+        ) : (
+          <input
+            type="button"
+            value="Watched"
+            onClick={() => checked("watched")}
+          />
+        )}
+        {watched.watchFilters.watched ? (
+          <input type="button" value="Not Watched" disabled />
+        ) : (
+          <input
+            type="button"
+            value="Not Watched"
+            onClick={() => checked("not_watched")}
+          />
+        )}
       </form>
-      <div>
-        {allMovies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
-      </div>
+      {watched.moviesFiltered.map((movie) => (
+        <MovieCard key={movie.id} {...movie} />
+      ))}
     </div>
   );
 };
 
-export default connect(mapStateToProps)(MovieList);
+export default connect(mapStateToProps, {
+  addMoviesFiltered,
+  watchedFilters,
+  filterGenre,
+})(MovieList);

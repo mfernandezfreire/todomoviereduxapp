@@ -13,6 +13,7 @@ const addMovie = (state = [], action) => {
           editing: false,
         },
       ];
+
     case "EDIT_TOWATCH":
       return state.map((movie) =>
         movie.id === action.id
@@ -25,25 +26,28 @@ const addMovie = (state = [], action) => {
             }
           : movie
       );
+
     case "DELETE_MOVIE":
       return state.filter((movie) => movie.id !== action.id);
+
     case "TOGGLE_TOWATCH":
       return state.map((movie) =>
         movie.id === action.id
           ? { ...movie, completed: !movie.completed }
           : movie
       );
+
     case "TOGGLE_EDITING":
       return state.map((movie) =>
         movie.id === action.id ? { ...movie, editing: !movie.editing } : movie
       );
+
     case "ADD_GENRE":
       return state.map((movie) =>
         movie.id === action.id
           ? { ...movie, genre: movie.genre.push(action.genre) }
           : movie
       );
-
     default:
       return state;
   }

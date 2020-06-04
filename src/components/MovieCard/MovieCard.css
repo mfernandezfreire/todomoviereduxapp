@@ -1,9 +1,3 @@
-.MovieCard {
-  width: 30vw;
-  border: 1px solid;
-  border-radius: 1px;
-}
-
 .MovieCard image {
   width: 400px;
 }
