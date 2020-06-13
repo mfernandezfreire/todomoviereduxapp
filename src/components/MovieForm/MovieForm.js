@@ -12,9 +12,9 @@ const MovieForm = ({ addMovie }) => {
   const [genre, updtateGenre, resetGenre] = useInputState("");
 
   return (
-    <section className="MovieForm">
-      <Header />
-      <div className="container-fluid m-2">
+    <div>
+      <div className="MovieForm container-fluid mt-2">
+        <Header />
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -62,7 +62,7 @@ const MovieForm = ({ addMovie }) => {
           </button>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 
