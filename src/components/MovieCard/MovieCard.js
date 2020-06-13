@@ -15,7 +15,10 @@ const MovieCard = (movies) => {
   return movies.editing ? (
     <EditMovie key={movies.id} {...movies} />
   ) : (
-    <div key={movies.id} className="card col-3 p-0 m-4">
+    <div
+      key={movies.id}
+      className="card col-10 col-sm-8 col-md-4 col-lg-4 p-0 m-4"
+    >
       <div className="cardHeader card-body p-2 d-flex flex-column justify-content-center">
         <h1 className="h4 bg-muted m-2 p-2 text-center rounded bg-light">
           {movies.movie}
@@ -61,39 +64,6 @@ const MovieCard = (movies) => {
         />
       </div>
     </div>
-    // <div key={movies.id} className="MovieCard">
-    //   <h1
-    //     style={{
-    //       textDecoration: movies.completed ? "line-through" : "none",
-    //     }}
-    //   >
-    //     {movies.movie}
-    //   </h1>
-    //   {movies.genre.map((genre, idx) => (
-    //     <span key={idx}>{genre}</span>
-    //   ))}
-    //   <button type="button" onClick={() => movies.toggleEditing(movies.id)}>
-    //     Editing Mode
-    //   </button>
-    //   {movies.completed === false ? (
-    //     <img
-    //       src={notview}
-    //       alt="no visto"
-    //       onClick={() => movies.toggleWatch(movies.id)}
-    //     />
-    //   ) : (
-    //     <img
-    //       src={view}
-    //       alt="no visto"
-    //       onClick={() => movies.toggleWatch(movies.id)}
-    //     />
-    //   )}{" "}
-    //   <img
-    //     src={papelera}
-    //     onClick={() => movies.deleteMovie(movies.id)}
-    //     alt="logo de papelera"
-    //   />
-    // </div>
   );
 };
 

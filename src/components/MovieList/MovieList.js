@@ -38,12 +38,14 @@ const MovieList = ({
   };
 
   return (
-    <div className="MovieList container-fluid mt-5">
-      <form className="form-row  d-flex flex-column align-items-center mt-3">
-        <div className="col-6 mt-3">
-          <label htmlFor="filtros" className="display-4 mb-3">
-            Director's Cut
-          </label>
+    <div className="MovieList container-fluid">
+      <div className="row d-flex flex-column align-items-center">
+        <div className="col-12 col-sm-12">
+          <p className="display-4 text-center m-3">Director's Cut</p>
+        </div>
+      </div>
+      <form className="form-row d-flex flex-column align-items-center mt-3">
+        <div className="col-12 col-sm-10 mt-3">
           <div className="input-group">
             <input
               type="text"
@@ -107,7 +109,7 @@ const MovieList = ({
           </small>
         </div>
       </form>
-      <div className="container-fluid d-flex flex-row justify-content-center flex-wrap mt-3">
+      <div className="row d-flex flex-row justify-content-center flex-wrap mt-3 p-3">
         {watched.moviesFiltered.map((movie) => (
           <MovieCard key={movie.id} {...movie} />
         ))}
