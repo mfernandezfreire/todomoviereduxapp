@@ -9,6 +9,8 @@ import {
 
 import MovieCard from "../MovieCard/MovieCard";
 
+import "./MovieList.css";
+
 const mapStateToProps = (state) => ({
   movies: state.movies,
   watched: state.watchedFilters,
@@ -36,46 +38,80 @@ const MovieList = ({
   };
 
   return (
-    <div className="MovieList">
-      <h1>To Watch List</h1>
-      <h2>All the filter go here!!</h2>
-      <form>
-        <label>Da filters</label>
-        <input
-          type="text"
-          ref={(node) => {
-            input = node;
-          }}
-          onChange={search}
-          placeholder="Introduce here the genre you wanna see"
-        />
-        {watched.watchFilters.all ? (
-          <input type="button" value="All" disabled />
-        ) : (
-          <input type="button" value="All" onClick={() => checked("all")} />
-        )}
-        {watched.watchFilters.watched ? (
-          <input type="button" value="Watched" disabled />
-        ) : (
-          <input
-            type="button"
-            value="Watched"
-            onClick={() => checked("watched")}
-          />
-        )}
-        {watched.watchFilters.watched ? (
-          <input type="button" value="Not Watched" disabled />
-        ) : (
-          <input
-            type="button"
-            value="Not Watched"
-            onClick={() => checked("not_watched")}
-          />
-        )}
+    <div className="MovieList container-fluid mt-5">
+      <form className="form-row  d-flex flex-column align-items-center mt-3">
+        <div className="col-6 mt-3">
+          <label htmlFor="filtros" className="display-4 mb-3">
+            Director's Cut
+          </label>
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control"
+              ref={(node) => {
+                input = node;
+              }}
+              onChange={search}
+              placeholder="Suspense, Comedia, Drama...."
+            />
+            <div class="input-group-append">
+              {watched.watchFilters.all ? (
+                <input
+                  type="button"
+                  className="btn btn-secondary"
+                  value="Todas"
+                  disabled
+                />
+              ) : (
+                <input
+                  type="button"
+                  className="btn btn-secondary"
+                  value="Todas"
+                  onClick={() => checked("all")}
+                />
+              )}
+              {watched.watchFilters.watched ? (
+                <input
+                  type="button"
+                  className="btn btn-secondary"
+                  value="Vista"
+                  disabled
+                />
+              ) : (
+                <input
+                  type="button"
+                  className="btn btn-secondary"
+                  value="Vista"
+                  onClick={() => checked("watched")}
+                />
+              )}
+              {watched.watchFilters.not_watched ? (
+                <input
+                  type="button"
+                  value="No Vista"
+                  className="btn btn-secondary"
+                  disabled
+                />
+              ) : (
+                <input
+                  type="button"
+                  value="No Vista"
+                  className="btn btn-secondary"
+                  onClick={() => checked("not_watched")}
+                />
+              )}
+            </div>
+          </div>
+          <small class="form-text text-muted mt-2">
+            Elige el género y si has visto o no la pelicula.
+          </small>
+        </div>
       </form>
-      {watched.moviesFiltered.map((movie) => (
-        <MovieCard key={movie.id} {...movie} />
-      ))}
+      <div className="container-fluid d-flex flex-row justify-content-center flex-wrap mt-3">
+        {watched.moviesFiltered.map((movie) => (
+          <MovieCard key={movie.id} {...movie} />
+        ))}
+      </div>
     </div>
   );
 };

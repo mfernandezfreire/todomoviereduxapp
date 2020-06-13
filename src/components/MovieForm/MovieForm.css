@@ -1,7 +1,4 @@
-.addMovie form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30vw;
-  height: 30vh;
+.MovieForm {
+  height: 100vh;
+  width: 100vw;
 }
